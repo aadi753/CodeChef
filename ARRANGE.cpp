@@ -5,11 +5,11 @@
 // #define INT_MAX 147483647;
 using namespace std;
 
-string num_to_bin_rev(long num, long len){
+string num_to_bin_rev(long long num, long len){
 	string bin_rep = "";
 
 	while(num > 0){
-		if(num % 2 != 0){
+		if(num % 2 == 1){
 			bin_rep += '1';
 		}
 		else{
@@ -19,16 +19,16 @@ string num_to_bin_rev(long num, long len){
 		len--;
 	}
 
-	while(len--){
+	for(int i = 0; i < len; i++){
 		bin_rep += '0';
 	}
 
 	return bin_rep;
 }
 
-long bin_to_num(string str){
-	long res = 0;
-	long numb = 1;
+long long bin_to_num(string str){
+	long long res = 0;
+	long long numb = 1;
 
 	for(int i = str.size() - 1; i >= 0; i--){
 		if(str[i] == '1'){
@@ -47,14 +47,15 @@ int main(){
 	int t;
 	cin >> t;
 	while(t--){
+		
 		long k;
 		cin >> k;
 
 		long l = 1;
-
 		for(int i = 0; i < k; i++){
 			l = l * 2;
 		}
+		//l = 2 ^ k
 
 		string s;
 		cin >> s;
@@ -64,7 +65,7 @@ int main(){
 		//the first char remains the same 
 		ans[0] = s[0];
 
-		for(long i = 1; i < l - 1; i++){
+		for(long long i = 1; i < (l - 1); i++){
 
 			char c = s[i];
 
@@ -72,7 +73,7 @@ int main(){
 			string bin = num_to_bin_rev(i, k);
 
 			//get the new number (convert binary to normal)
-			long num = bin_to_num(bin);
+			long long num = bin_to_num(bin);
 
 			//store at that place in ans array 
 			ans[num] = c;
@@ -83,7 +84,13 @@ int main(){
 		//last also remains the same
 		ans[l - 1] = s[l - 1];
 
-		cout << ans << "\n";
+		string answer = "";
+
+		for(int i = 0; i < l; i++){
+			answer += ans[i];
+		}
+
+		cout << answer << "\n";
 
 	}
 	return 0;
