@@ -14,55 +14,54 @@ int main(){
 		long n, m, x, y;
 		cin >> n >> m >> x >> y;
 
-		n--;
-		m--;
-		
-		// int n_done = 0;
-
-		// if(n == 0){
-		// 	n_done = 1;
-		// }
-		// else if(n >= x){
-		// 	if(n % x == 0){
-		// 		n_done = 1;
-		// 	}
-		// 	else if(n - 1 % x == 0){
-		// 		n_done = 1;
-		// 	}
-		// }
-
-		// int m_done = 0;
-
-		// if(m == 0){
-		// 	m_done = 1;
-		// }
-		// else if(m >= y){
-		// 	if(m % y == 0){
-		// 		m_done = 1;
-		// 	}
-		// 	else if(m - 1 % y == 0){
-		// 		m_done = 1;
-		// 	}
-		// }
-
-		long N_remaining = n % x;
-		long M_remaining = m % y;
+		//is it possible to go from 1 to n 
+		//and 1 to m
 
 		string ans = "Pofik";
-
-		if(N_remaining == 0 || N_remaining == 1 && M_remaining == 0 || M_remaining == 1){
+        
+		if(((n == 1) || ((n - 1) % x == 0)) && ((m == 1) || ((m - 1) % y == 0))){
 			ans = "Chefirnemo";
 		}
+		else{
 
-		// if(N_remaining == 0 && M_remaining == 0){
+			long n1 = n - 2;
+			long m1 = m - 2;
+
+			if(n1 >= 0 && m1 >= 0 && (n1 % x == 0) && (m1 % y == 0)){
+				ans = "Chefirnemo";
+			}
+
+		} 
+
+		//ALSO CORRECT
+		//if both are already 1
+
+		// if(n == 1 && m == 1){
 		// 	ans = "Chefirnemo";
 		// }
-		// else if(N_remaining == 1 && M_remaining == 1){
-		// 	ans = "Chefirnemo";
+		// else{
+		// 	//we need to get there
+
+		// 	//if we can reach there by incrementing by x and y
+
+		// 	if((n - 1) % x == 0 && (m - 1) % y == 0){
+		// 		ans = "Chefirnemo";
+		// 	}
+		// 	else{
+		// 		//we can not directly reach there
+		// 		//but can we reach there using special op
+
+		// 		//we can't use special op when n or m = 1
+
+		// 		if(n != 1 && m != 1){
+		// 			if((n - 2) % x == 0 && (m - 2) % y == 0){
+		// 				ans = "Chefirnemo";
+		// 			}
+		// 		}
+		// 	}
 		// }
 
 		cout << ans << "\n";
-
 	}
 	return 0;
 }
