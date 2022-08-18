@@ -19,25 +19,35 @@ int main(){
 
 		int both = 0, bob = 0, alice = 0;
 
-		long arr[n];
+		long num;
 		for(int i = 0; i < n; i++){
-			cin >> arr[i];
+			cin >> num;
 
-			if(arr[i] % a == 0 && arr[i] % b == 0){
+			if(num % a == 0 && num % b == 0){
 				//both can take it 
 				both++;
 			}
-			else if(arr[i] % a == 0){
+			else if(num % a == 0){
 				//bob can take it
 				bob++;
 			}
-			else if(arr[i] % b == 0){
+			else if(num % b == 0){
 				//alice can take it
 				alice++;
 			}
 		}
 
 		string ans = "BOB";
+
+		if(both > 0){
+			bob++;
+		}
+
+		if(alice >= bob){
+			ans = "ALICE";
+		}
+
+		cout << ans << "\n";
 
 		//check if number is for bob or alice or both
 		//if for both bob will take it first
@@ -50,37 +60,37 @@ int main(){
 		//if both is odd bob gets it 
 		//else alice gets it
 		
-		string turn = "BOB";
-		
-		if(both % 2 == 0){
-			turn = "BOB";
-		}
-		else{
-			turn = "ALICE";
-		}
-		
-		//whoever turn is first must have more moves in order to win
+		// string turn = "BOB";
 
-		if(turn == "BOB"){
-			//bob
-			if(bob > alice){
-				ans = "BOB";
-			}
-			else{
-				ans = "ALICE";
-			}
-		}
-		else{
-			//alice
-			if(alice > bob){
-				ans = "ALICE";
-			}
-			else{
-				ans = "BOB";
-			}
-		}
+		// if(both % 2 == 0){
+		// 	turn = "BOB";
+		// }
+		// else{
+		// 	turn = "ALICE";
+		// }
+		
+		// //whoever turn is first must have more moves in order to win
 
-		cout << ans << "\n";
+		// if(turn == "BOB"){
+		// 	//bob
+		// 	if(bob > alice){
+		// 		ans = "BOB";
+		// 	}
+		// 	else{
+		// 		ans = "ALICE";
+		// 	}
+		// }
+		// else{
+		// 	//alice
+		// 	if(alice > bob){
+		// 		ans = "ALICE";
+		// 	}
+		// 	else{
+		// 		ans = "BOB";
+		// 	}
+		// }
+
+		//cout << ans << "\n";
 	}
 	return 0;
 }
