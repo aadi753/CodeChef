@@ -8,24 +8,25 @@ using namespace std;
 int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
-	int t;
+	long t;
 	long n;
 	cin >> t;
 	while(t--){
 		//input
 		cin >> n;
 
-		long arr[n];
+		long long arr[n];
 		for(int i = 0; i < n; i++){
 			cin >> arr[i];
 		}
 
+		//preprocess
+
 		long long ltr[n];
 		long long rtl[n];
 
-		//process
-		
-		for(int i = 0; i < n; i++){
+		for(long i = 0; i < n; i++){
+			
 			if(i == 0 || ltr[i - 1] == 0){
 				ltr[i] = arr[i];
 			}
@@ -33,27 +34,53 @@ int main(){
 				ltr[i] = ltr[i - 1] * arr[i];
 			}
 
-			if(i == 0 || rtl[n - i] == 0){
-				rtl[n - i - 1] = arr[n - i - 1];
+			if(i == 0 || rtl[i - 1] == 0){
+				rtl[i] = arr[n - i - 1];
 			}
 			else{
-				rtl[n - i - 1] = rtl[n - i] * arr[n - i - 1];
+				rtl[i] = rtl[i - 1] * arr[n - i - 1];
 			}
 
 		}
 		
-// 		for(int i = 0; i < n; i++){
-// 		    cout << rtl[i] << ' ';
-// 		}
-// 		cout << '\n';
+		//print preprocess
 
-//         for(int i = 0; i < n; i++){
-// 		    cout << ltr[i] << ' ';
-// 		}
-// 		cout << '\n';
+        for(long i = 0; i < n; i++){
+		    cout << ltr[i] << ' ';
+		}
+		cout << '\n';
+		
+		for(int i = 0; i < n; i++){
+		    cout << rtl[i] << ' ';
+		}
+		cout << '\n';
+
+		//process
+		//find max
+		long long max = LONG_MIN;
+
+		long last_neg_index = -1;
+		//keep track of last negetive number to check if removing upto that can make the number bigger or not
+		for(int i = 0; i < n; i++){
+			if(arr[i] * arr[i] > max){
+				max = arr[i] * arr[i]; 
+			}
+
+			if(ltr[i] > max){
+				max = ltr[i];
+			}
+
+			if(rtl[i] > max){
+				max = rtl[i];
+			}
+
+			if(last_neg_index >= 0){
+				//there exist a negetive element befo
+			}
+		}
+
 		
 		long long min = arr[0] * arr[0];
-		long long max = arr[0] * arr[0];
 
 		for(int i = 0; i < n; i++){
 			
@@ -75,15 +102,15 @@ int main(){
 			
 			
 			//while updating min make sure if ltr or rtl == arr then sq it
-			if(ltr[i] == arr[i]){
+			if(i > 0 && ltr[i] == arr[i] && ltr[i - 1] == 0){
 			    //already done
 			}
 			else if(ltr[i] < min){
 				min = ltr[i];
 			}
 			
-			if(rtl[i] == arr[i]){
-			    
+			if(i < n - 1 && rtl[i] == arr[i] && rtl[i + 1] == 0){
+			    //already done
 			}
 			else if(rtl[i] < min){
 				min = rtl[i];
