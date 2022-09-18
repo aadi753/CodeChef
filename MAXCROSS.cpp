@@ -11,10 +11,14 @@ int main(){
 	int n;
 	cin >> n;
 
-	int arr[n][n];
+	int arr[n][n] = {};
+	char ch;
 	for(int i = 0; i < n; i++){
 		for(int j = 0; j < n; j++){
-			cin >> arr[i][j];
+			cin >> ch;
+			if(ch == 'X'){
+			    arr[i][j] = 1;
+			}
 		}
 	}
 
@@ -25,7 +29,12 @@ int main(){
 			
 			//left to right
 			if(arr[i][j]){
-				matrix[0][i][j] = matrix[0][i][j - 1] + 1;
+			    if(j){
+			        matrix[0][i][j] = matrix[0][i][j - 1] + 1;
+			    }
+			    else{
+			        matrix[0][i][j] = 1;
+			    }
 			}
 			else{
 				matrix[0][i][j] = 0;
@@ -124,6 +133,13 @@ int main(){
 		}
 	}
 
+    // for(int i = 0; i < n; i++){
+    //     for(int j = 0; j < n; j++){
+    //         cout << matrix[0][i][j] << ' ';
+    //     }
+    //     cout << '\n';
+    // }
+    
 	long a, b, c, d;
     long max;
     
@@ -132,10 +148,10 @@ int main(){
 			
 			if(arr[i][j]){
 				
-				a = matrix[0][i][j] + matrix[1][i][j];
-				b = matrix[2][i][j] + matrix[3][i][j];
-				c = matrix[4][i][j] + matrix[5][i][j];
-				d = matrix[6][i][j] + matrix[7][i][j];
+				a = matrix[0][i][j] + matrix[1][i][j] - 1;
+				b = matrix[2][i][j] + matrix[3][i][j] - 1;
+				c = matrix[4][i][j] + matrix[5][i][j] - 1;
+				d = matrix[6][i][j] + matrix[7][i][j] - 1;
 				
 				max = a;
 		        if(b > max){
